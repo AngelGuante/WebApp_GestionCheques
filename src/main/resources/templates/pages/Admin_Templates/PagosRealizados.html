@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <!-- REGISTROS -->
+    <div class="card p-0 bg-light sombra container mt-5">
+        <div class="card-body p-0">
+            <div class="card-title m-0">
+                <p class="font-weight-bold m-0 p-1 h4 color-3" th:text="'Facturas creadas Por: ' + ${usuario}"></p>
+            </div>
+            <table class="table m-0 color-4">
+                <thead class="thead">
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Cheque</th>
+                        <th class="text-center">Fecha Pago</th>
+                        <th class="text-center">Monto Pagado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="lead text-uppercase" th:each="pago: ${Pagos}">
+                        <td th:text="${pago.id}"></td>
+                        <td>
+                            <a class="btn color-5 letrasColor1 text-center" th:href="@{/VerCheque/} + ${pago.cheeque}">
+                                <label th:text="${pago.id}"></label>
+                            </a>
+                        </td>
+                        <td class="text-center" th:text="${pago.createAt}"></td>
+                        <td class="text-center" th:text="${pago.montoPagado}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINATOR -->
+        <div th:replace="pages/Util/Fragments :: paginator"></div>
+
+        <!-- BOTON DE REGRESAR A LA VENTANA ANTERIOR -->
+        <a class="btn btn-primary p-3 letrasColor1" th:href="@{/AdminHome}">Regresar</a>
+    </div>
+</body>
+
+<!-- FOOTER -->
+<footer th:replace="pages/Util/Fragments :: footer">
+</footer>
+
+</html>

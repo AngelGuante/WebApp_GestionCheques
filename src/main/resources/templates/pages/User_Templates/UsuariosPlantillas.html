@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="es">
+
+<div th:fragment="VerCheques">
+    <div class="card p-0 bg-light mt-2 sombra">
+        <div class="card-body p-0">
+            <!-- TITULO DEL CARD -->
+            <div class="card-title m-0">
+                <p class="font-weight-bold m-0 pl-2 py-1 h4 color-3">Verificar y Confirmar</p>
+            </div>
+
+            <!-- CUERPO DEL CARD -->
+            <div class="px-3 pb-1">
+                <div class="row" id="Cliente">
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/id-card.png}" height="60" />
+                            <input class="col-10" type="text" th:value="${cliente.cedula}" disabled />
+                        </div>
+                        <div class="form-gorup row">
+                            <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                            <input class="col-10" type="text" th:value="${cliente.nombre}" disabled />
+                        </div>
+
+                        <br />
+
+                        <div class="form-gorup row">
+                            <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                            <input class="col-10" type="text" th:value="${cliente.apellido}" disabled />
+                        </div>
+
+                        <br />
+
+                        <div class="form-gorup row">
+                            <img class="col-2" th:src="@{/images/Calendar.png}" height="50" />
+                            <input class="col-10" type="date" th:value="${cliente.Nacimiento}" disabled />
+                        </div>
+
+                        <br />
+
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Idiom.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.idiomas}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Phone.png}" height="50" />
+                            <input class="col-10" type="number" th:value="${cliente.Contacto}" disabled />
+                        </div>
+
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Book.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.NivelAcademico}" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group row mt-2">
+                            <img class="col-2" th:src="@{/images/pin.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.direccion}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.Conyuge}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.NombreMadre}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/id-card.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.CedulaMadre}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.NombrePadre}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/id-card.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.CedulaPadre}" disabled />
+                        </div>
+                        <div class="form-group row">
+                            <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                            <input class="col-10" type="text" th:value="${cliente.Hijos}" disabled />
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div id="Cheque">
+                    <div class="form-gorup row">
+                        <img class="col-1" th:src="@{/images/Nro.png}" height="50" />
+                        <input class="col-4" type="text" th:value="${cheque.codigo}" disabled />
+                    </div>
+
+                    <br />
+
+                    <div class="form-gorup row">
+                        <img class="col-1" th:src="@{/images/Calendar.png}" height="50" />
+                        <input class="col-4" type="date" th:value="${cheque.fechaDeEmision}" disabled />
+                    </div>
+
+                    <br />
+                    <div class="form-group row">
+                        <img class="col-1" th:src="@{/images/Money.png}" height="50" />
+                        <input class="col-4 mb-4" type="number" th:value="${cheque.monto}" disabled />
+                    </div>
+
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

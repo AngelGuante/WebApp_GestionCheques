@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+         <form>
+               <label>Nombre</label><br>
+               <input type="text" th:value="${cliente.nombre}" name="nombre"/><br>
+               <label>Apellido</label><br>
+               <input type="text" th:value=${cliente.apellido} name="apellido"/><br>
+               <label>Cedula</label><br>
+               <input type="text" th:value=${cliente.cedula} name="cedula"/><br>
+               <label>Telefono</label><br>
+               <input type="text" th:value=${cliente.telefono} name="telefono"/><br>
+               <label>Codigo</label><br>
+         </form>
+</body>
+</html>

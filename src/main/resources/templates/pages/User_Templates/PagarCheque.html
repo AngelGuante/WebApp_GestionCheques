@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <div class="card p-0 bg-light mt-2 container sombra">
+        <div class="card-body p-0">
+            <div class="card-title m-0">
+                <p class="font-weight-bold m-0 p-2 h3 color-3">FORMULARIO</p>
+            </div>
+            <div class="p-4">
+                <form th:action="@{/RelizarPago}" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p class="h2">Cliente</p>
+                            <div class="form-group row">
+                                <img class="col-2" th:src="@{/images/id-card.png}" height="60" />
+                                <input class="col-10" type="text" th:value="${Cliente.cedula}" disabled />
+                            </div>
+                            <div class="form-gorup row">
+                                <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                                <input class="col-10" type="text" th:value="${Cliente.nombre}" disabled />
+                            </div>
+
+                            <br />
+
+                            <div class="form-gorup row">
+                                <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                                <input class="col-10" type="text" th:value="${Cliente.apellido}" disabled />
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <p class="h2 mb-4">Cheque</p>
+                            <div class="form-group row">
+                                <img class="col-2" th:src="@{/images/Money.png}" height="50" />
+                                <input class="col mb-4 lead" type="number" th:value="${Cheque.monto}" disabled />
+                            </div>
+                            <div class="form-gorup row mt-4">
+                                <img class="col-2" th:src="@{/images/Calendar.png}" height="50" />
+                                <input class="col" type="date" th:value="${Cheque.fechaDeEmision}" disabled />
+                            </div>
+                            <div class="form-gorup row mt-4">
+                                <img class="col-2" th:src="@{/images/Calendar.png}" height="50" />
+                                <input class="col" type="text" th:value="${dias} + ' Dias Transcurridos'" disabled />
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div>
+                        <p class="h2 mb-4 text-center mt-3">Detalles Del Pago</p>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="col-12 lead mb-3" type="text"
+                                    th:value="${pagosHechos} + '        Pagos Hechos'" disabled />
+                                <input class="col-12 lead mb-3" type="text"
+                                    th:value="${quincenas} + '          Quincenas en Atraso'" disabled />
+                                <input class="col-12 lead mb-3" type="text"
+                                    th:value="${porciento} + '      Interes Unitario del 5%'" disabled />
+                            </div>
+                            <div class="col-lg-6">
+                                <input class="col-12 lead mb-3" type="text"
+                                    th:value="${InteresTotal} + '$      <--- Interes Total'" disabled />
+                                <input class="col-12 lead mb-3 font-weight-bold" type="text"
+                                    th:value="${pagoTotal} + '$     <--- Total A Pagar'" disabled />
+                                <!-- PARA QUE AL ENVIAR EL PAGO NO DE ERROR POR TENER EL INPUT DISABLED YA QUE SE NECESITA UN CAMPO LLAMADO 'pagoTotal' EN LA PAGINA -->
+                                <input type="text" name="pagoTotal" th:value="${pagoTotal}" hidden />
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <!-- BOTON DE REGRESAR A LA VENTANA ANTERIOR -->
+                        <a class="btn btn-primary p-3 letrasColor1" th:href="@{/Usuario/Home}">Regresar al Listado</a>
+
+                        <!-- BOTON PARA SALDAR EL CHEQUE -->
+                        <a class="btn btn-info p-3 letrasColor1" th:href="@{/RelizarSaldo/} + ${Cheque.id}">Saldar Cheque</a>
+
+                        <!-- BOTON DE REALIZAR EL PAGO -->
+                        <button th:disabled="${quincenas ==  0}"
+                            class="float-right mb-3 btn p-3 font-weight-bold color-8 letrasColor1"
+                            type="submit">Pagar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer th:replace="pages/Util/Fragments :: footer">
+</footer>
+
+
+</html>

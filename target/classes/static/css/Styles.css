@@ -1,0 +1,72 @@
+/* RESETEAR TODA LA PAGINA */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+input, select{
+    background: transparent;
+    border: none;
+    border-bottom: #00bcd4 solid 1px;
+}
+
+/* COLORES */
+
+.color-1{
+    background-color: #03a9f4;
+}
+
+.color-2{
+    background-color: #97d8fd;
+}
+
+.color-3{
+    background-color: #2196f3;
+}
+
+.color-4{
+    background: #e0e0e0;
+}
+
+.color-5{
+    background-color: #00bcd4;
+}
+
+.color-6{
+    background-color: #337ab7;
+}
+
+.color-7{
+    background-color: #96abbd;
+}
+
+.color-8{
+    background-color: #5af85e;
+}
+
+.letrasColor1{
+    color:white;
+}
+
+.letrasColor2{
+    color:#2196f3;
+}
+
+.letrasColor3{
+    color: #e0e0e0;
+}
+
+/* ESTILOS DE ELEMENTOS */
+
+.paginator{
+    display: flex;
+    justify-content: center;
+}
+
+.sombra{
+    -webkit-box-shadow: 1px 3px 23px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 3px 23px -10px rgba(0,0,0,0.75);
+    box-shadow: 1px 3px 23px -10px rgba(0,0,0,0.75);
+}

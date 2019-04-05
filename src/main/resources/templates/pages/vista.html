@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout::head"></head>
+<body>
+        <table class="table">
+        
+           <tr>
+              <td th:text="Nombre">
+              <td th:text="Apellido">
+              <td th:text="Cedula">
+              <td th:text="Telefono">
+              <td th:text="Direccion">
+              <td th:text="Celular">
+              <td th:text="Idiomas">
+              <td th:text="Ver">
+           </tr>
+           
+           <tr th:each="items:${clientes}">
+                <td th:text="${items.nombre}">
+                <td th:text="${items.apellido}">
+                <td th:text="${items.cedula}">
+                <td th:text="${items.telefono}">
+                <td th:text="${items.direccion}">
+                <td th:text="${items.celular}">
+                <td th:text="${items.idiomas}">
+                <td><a th:href="@{/vista/} + ${items.id}">Ver</a></td>
+           </tr>
+        </table>
+</body>
+</html>

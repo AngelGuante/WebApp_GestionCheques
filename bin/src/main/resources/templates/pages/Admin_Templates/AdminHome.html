@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Administrador HomePage</title>
+</head>
+
+<body>
+</body>
+    <p>PAGINA DONDE ESTARAN 2 PANELES: 1-PANEL PARA VER,BUSCAR, EDITAR USUARIOS. 2-PANEL PARA AGREGAR USUARIOS</p>
+
+    <div id="Panel_VerUsuarios">
+        <!-- FORMULARIO -->
+        <form th:action="@{/BuscarUsurioForm}" method="POST">
+            <input name="BuscarUsurioForm" type="text" placeholder="Buscar Usuario" />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- REGISTROS -->
+        <div th:each="usuario: ${Clientes}">
+            <div>
+                <label th:text="${usuario.nombre}"></label>
+            </div>
+        </div>
+
+        <!-- PAGINATOR -->
+        <div th:replace="pages/Util/Paginator :: paginator"></div>
+    </div>
+
+
+    <div id="Panel_AgregarEditarUduarios">
+
+    </div>
+</html>

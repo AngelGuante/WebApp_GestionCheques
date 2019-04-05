@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout::head">
+</head>
+<body>
+        <form th:action="@{/form}" method="post">
+        
+                 <label>Nombre</label><br>
+                 <input type="text" th:value="${cliente.nombre}" name="nombre"/><br>
+                  <label>Apellido</label><br>
+                 <input type="text" th:value=${cliente.apellido} name="apellido"/><br>
+                  <label>Cedula</label><br>
+                 <input type="text" th:value=${cliente.cedula} name="cedula"/><br>
+                  <label>Telefono</label><br>
+                  <input type="text" th:value=${cliente.telefono} name="telefono"/><br>
+                   <label>Codigo</label><br>
+                   <input type="text" th:value=${cheque.codigo}/><br>
+                  <label>Monto</label><br>
+                  <input type="text" th:value=${cheques.monto}/><br>
+                  <label>Fecha de Emision</label><br>
+                  <input type="text" th:value=${cheque.fechaDeEmision}/><br>
+                  <label>No Cuenta</label><br>
+                  <input type="text" th:value=${cheque.noCuenta}/><br>
+                 <input type="submit" value="Enviar">
+        </form>
+</body>
+</html>

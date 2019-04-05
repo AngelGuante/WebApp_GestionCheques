@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <div class="container">
+        <!-- PLANTILLA QUE MUESTRA LOS DETALLES DE LOS CHEQUES -->
+        <div th:replace="/pages/User_Templates/UsuariosPlantillas :: VerCheques">
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <!-- BOTON DE REGRESAR A LA VENTANA ANTERIOR -->
+        <a class="btn btn-primary p-3 letrasColor1" th:href="@{/Usuario/Home}">Regresar</a>
+
+        <!-- BOTON PARA CREAR EL PAGO -->
+        <form class="float-right" th:action="@{/Pago}" method="POST">
+            <input name="opcion" value="1" hidden />
+            <button class="btn p-3 font-weight-bold color-8 letrasColor1" type="submit">Hacer Pago</button>
+        </form>
+    </div>
+
+</body>
+
+<footer th:replace="pages/Util/Fragments :: footer">
+</footer>
+
+</html>

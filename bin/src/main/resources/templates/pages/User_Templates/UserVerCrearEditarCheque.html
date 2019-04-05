@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <!-- MENU -->
+    <div class="container-fluid p-2 color-2">
+        <div th:classappend="${visible == 0 || visible == 1} ? (btn + ' ' + p-2 + ' ' + color-6 + ' ' + letrasColor1 + ' ' + sombra) : (btn + ' ' + p-2 + ' ' + color-7 + ' ' + letrasColor3)"
+            th:href="@{/Cheque}">
+            <label class="font-weight-bold h4">Datos del Cliente</label>
+        </div>
+        <div th:classappend="${visible == 2} ? (btn + ' ' + p-2 + ' ' + color-6 + ' ' + letrasColor1 + ' ' + sombra) : (btn + ' ' + p-2 + ' ' + color-7 + ' ' + letrasColor3)"
+            th:href="@{/Cheque}">
+            <label class="font-weight-bold h4">Datos del Cheque</label>
+        </div>
+        <div th:classappend="${visible == 3} ? (btn + ' ' + p-2 + ' ' + color-8 + ' ' + letrasColor1 + ' ' + sombra) : (btn + ' ' + p-2 + ' ' + color-7 + ' ' + letrasColor3)"
+            th:href="@{/Cheque}">
+            <label class="font-weight-bold h4">Confirmar Datos</label>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- USUARIO NUEVO O EXISTENTE -->
+        <div th:if="${visible == -1}" id="CrearNoCrearUsuario">
+            <div class="card p-0 bg-light mt-2 sombra">
+                <div class="card-body p-0">
+                    <div class="p-4">
+                        <!-- BOTON DE CANCELAR -->
+                        <div class="paginator m-4">
+                            <form class="mx-1 ml-3" th:action="@{/GestionarVariables}" method="POST">
+                                <input name="opcion" value="1" hidden />
+                                <button class="btn btn-info p-2 p-5 letrasColor1" type="submit"> &nbsp;Nuevo
+                                    Cliente&nbsp;&nbsp;</button>
+                            </form>
+                        </div>
+
+                        <div class="paginator m-4">
+                            <!-- BOTON DE REGRESAR A CLIENTE -->
+                            <form class="mx-1 text-center" th:action="@{/GestionarVariables}" method="POST">
+                                <input name="opcion" value="0" hidden />
+                                <button class="btn btn-info p-3  p-5 letrasColor1" type="submit">Cliente
+                                    Existente</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  USUARIO EXISTENTE -->
+        <div th:if="${visible == 0}" id="CrearNoCrearUsuario">
+            <div class="card p-0 bg-light mt-2 sombra">
+                <div class="card-body p-0">
+                    <div class="p-4">
+
+                        <!-- FORMULARIO -->
+                        <form class="form-group mt-4" th:action="@{/BuscarClienteForm}" method="POST">
+                            <div class="input-group">
+                                <input class="col-sm-11" name="BuscarClienteForm" type="text"
+                                    placeholder="BUSCAR CLIENTE" />
+                                <div class="input-group-append">
+                                    <img class="mx-2" th:src="@{/images/Buscar.png}" width="40" height="40" />
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- TABLA -->
+                        <table class="table m-0">
+                            <thead class="thead">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cedular</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Contacto</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="cliente: ${Clientes}">
+                                    <td th:text="${cliente.id}"></td>
+                                    <td th:text="${cliente.cedula}"></td>
+                                    <td th:text="${cliente.Nombre}"></td>
+                                    <td th:text="${cliente.Apellido}"></td>
+                                    <td th:text="${cliente.contacto}"></td>
+                                    <td>
+                                        <a class="btn color-5 letrasColor1"
+                                            th:href="@{/ClienteSeleccionado/} + ${cliente.id}">Seleccionar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- BOTON DE CANCELAR -->
+                        <form th:action="@{/GestionarVariables}" method="POST">
+                            <input name="opcion" value="4" hidden />
+                            <button class="btn btn-danger p-3 letrasColor1" type="submit">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- CREAR USUARIO -->
+        <div th:if="${visible == 1}" id="DatosCheque">
+            <div class="card p-0 bg-light mt-2 sombra">
+                <div class="card-body p-0">
+                    <div class="card-title m-0">
+                        <p class="font-weight-bold m-0 p-2 h3 color-3">FORMULARIO</p>
+                    </div>
+                    <div class="p-4">
+                        <form th:action="@{/CrearCheque}" th:object="${cliente}" method="POST">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/id-card.png}" height="60" />
+                                        <input class="col-10" type="text" th:field="*{cedula}"
+                                            placeholder="Nro. Identificacion" required />
+                                    </div>
+                                    <div class="form-gorup row">
+                                        <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                                        <input class="col-10" type="text" th:field="*{nombre}" placeholder="Nombre" />
+                                    </div>
+
+                                    <br />
+
+                                    <div class="form-gorup row">
+                                        <img class="col-2" th:src="@{/images/User_form.png}" height="60" />
+                                        <input class="col-10" type="text" th:field="*{apellido}"
+                                            placeholder="Apellidos" />
+                                    </div>
+
+                                    <br />
+
+                                    <div class="form-gorup row">
+                                        <img class="col-2" th:src="@{/images/Calendar.png}" height="50" />
+                                        <input class="col-10" type="date" th:field="*{Nacimiento}" />
+                                    </div>
+
+                                    <br />
+
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Idiom.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{idiomas}" placeholder="Idiomas" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Phone.png}" height="50" />
+                                        <input class="col-10" type="number" th:field="*{Contacto}"
+                                            placeholder="Contacto" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Book.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{NivelAcademico}"
+                                            placeholder="Nivel Academico" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/pin.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{direccion}"
+                                            placeholder="Direccion" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{Conyuge}" placeholder="Conyuge" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{NombreMadre}"
+                                            placeholder="Nombre de la Madre" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/id-card.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{CedulaMadre}"
+                                            placeholder="Nro. Identificacion de la Madre" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{NombrePadre}"
+                                            placeholder="Nombre del Padre" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/id-card.png}" height="50" />
+                                        <input class="col-10" type="text" th:field="*{CedulaPadre}"
+                                            placeholder="Nro. Identificacion del Padre" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <img class="col-2" th:src="@{/images/Couple.png}" height="50" />
+                                        <input class="col-10" type="text" placeholder="Hijos" th:field="*{Hijos}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!-- BOTON DE CONTINUAR -->
+                            <input class="btn color-3 p-3 float-right letrasColor1" type="submit"
+                                value="Continuar"></input>
+                        </form>
+
+                        <!-- BOTON DE CANCELAR -->
+                        <form th:action="@{/GestionarVariables}" method="POST">
+                            <input name="opcion" value="4" hidden />
+                            <button class="btn btn-danger p-3 letrasColor1" type="submit">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CREAR CHEQUE -->
+        <div th:if="${visible == 2}" id="DatosCheque">
+            <div class="card p-0 bg-light mt-2 sombra">
+                <div class="card-body p-0">
+                    <div class="card-title m-0">
+                        <p class="font-weight-bold m-0 p-2 h3 color-3">FORMULARIO</p>
+                    </div>
+                    <div class="p-4">
+                        <form th:action="@{/CrearCheque}" th:object="${cheque}" method="POST">
+                            <div class="form-gorup row">
+                                <img class="col-1" th:src="@{/images/Nro.png}" height="50" />
+                                <input class="col-4" type="text" th:field="*{codigo}" placeholder="Codigo del Cheque"
+                                    required />
+                            </div>
+
+                            <br />
+
+                            <div class="form-gorup row">
+                                <img class="col-1" th:src="@{/images/Calendar.png}" height="50" />
+                                <input class="col-4" type="date" th:field="*{fechaDeEmision}" required />
+                            </div>
+
+                            <br />
+
+                            <div class="form-group row">
+                                <img class="col-1" th:src="@{/images/Money.png}" height="50" />
+                                <input class="col-4 mb-4" type="number" th:field="*{monto}" placeholder="Monto"
+                                    required />
+                            </div>
+
+                            <hr />
+
+                            <!-- BOTON DE CONTINUAR -->
+                            <input class="btn color-3 p-3 float-right letrasColor1" type="submit"
+                                value="Continuar"></input>
+                        </form>
+
+                        <div class="row">
+                            <!-- BOTON DE CANCELAR -->
+                            <form class="mx-1" th:action="@{/GestionarVariables}" method="POST">
+                                <input name="opcion" value="4" hidden />
+                                <button class="btn btn-danger p-3 letrasColor1" type="submit">Cancelar</button>
+                            </form>
+
+                            <!-- BOTON DE REGRESAR A CLIENTE -->
+                            <form th:action="@{/GestionarVariables}" method="POST">
+                                <input name="opcion" value="1" hidden />
+                                <button class="btn btn-primary p-3 letrasColor1" type="submit">Regresar a Datos
+                                    Clientes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFIRMAR -->
+        <div th:if="${visible == 3}" id="ConfirmarDatos">
+            <!-- PLANTILLA QUE MUESTRA LOS DETALLES DE LOS CHEQUES -->
+            <div th:replace="/pages/User_Templates/UsuariosPlantillas :: VerCheques">
+            </div>
+
+            <div class="row mt-4">
+                <!-- BOTON DE CANCELAR -->
+                <form class="mx-1 ml-3" th:action="@{/GestionarVariables}" method="POST">
+                    <input name="opcion" value="4" hidden />
+                    <button class="btn btn-danger p-2 letrasColor1" type="submit">Cancelar</button>
+                </form>
+
+                <!-- BOTON DE REGRESAR A CLIENTE -->
+                <form class="mx-1" th:action="@{/GestionarVariables}" method="POST">
+                    <input name="opcion" value="1" hidden />
+                    <button class="btn btn-primary p-3 letrasColor1" type="submit">Regresar a Datos
+                        Clientes</button>
+                </form>
+
+                <!-- BOTON DE REGRESAR A CHEQUE -->
+                <form class="mx-1" th:action="@{/GestionarVariables}" method="POST">
+                    <input name="opcion" value="2" hidden />
+                    <button class="btn btn-primary p-3 letrasColor1" type="submit">Regresar a Datos
+                        Cheque</button>
+                </form>
+
+                <!-- BOTON CONFIRMAR -->
+                <form class="mx-1" th:action="@{/GestionarVariables}" method="POST">
+                    <input name="opcion" value="3" hidden />
+                    <button class="btn p-3 font-weight-bold color-8 letrasColor1" type="submit">Confirmar!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer th:replace="pages/Util/Fragments :: footer">
+</footer>
+
+</html>

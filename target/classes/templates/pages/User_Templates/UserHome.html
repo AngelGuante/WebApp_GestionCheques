@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="es">
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <!-- MENU -->
+    <div class="container-fluid p-1 color-2">
+        <a class="btn p-1 color-3 letrasColor1 sombra" th:href="@{/Cheque}">
+            <label class="font-weight-bold h5">Crear Cheque</label>
+            <img class="mx-2" th:src="@{/images/agregar.png}" width="26" height="26" />
+        </a>
+    </div>
+
+    <div id="Panel_VerClientes" class="container">
+        <!-- FORMULARIO -->
+        <form class="form-group mt-4" th:action="@{/BuscarChequeForm}" method="POST">
+            <div class="input-group">
+                <input class="col-sm-11" name="BuscarChequeForm" type="text" placeholder="BUSCAR CHEQUE POR SU CODIGO" />
+                <div class="input-group-append">
+                    <img class="mx-2" th:src="@{/images/Buscar.png}" width="20" height="20" />
+                </div>
+            </div>
+        </form>
+
+        <!-- REGISTROS -->
+        <div class="card p-0 bg-light sombra">
+            <div class="card-body p-0">
+                <div class="card-title m-0">
+                    <p class="font-weight-bold m-0 pl-2 py-1 h4 color-3">CHEQUES</p>
+                </div>
+                <table class="table m-0 color-4">
+                    <thead class="thead">
+                        <tr>
+                            <th>ID</th>
+                            <th>CODIGO</th>
+                            <th>CLIENTE</th>
+                            <th>MONTO</th>
+                            <th>FECHA</th>
+                            <th>DETALLES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="lead text-uppercase" th:each="cheque: ${Cheques}">
+                            <td th:text="${cheque.id}"></td>
+                            <td th:text="${cheque.codigo}"></td>
+                            <td th:text="${cheque.cliente.nombre} + '  ' + ${cheque.cliente.apellido}"></td>
+                            <td th:text="${cheque.monto}"></td>
+                            <td th:text="${cheque.fechaDeEmision}"></td>
+                            <td>
+                                <a class="btn color-5 letrasColor1" th:href="@{/VerCheque/} + ${cheque.id}">
+                                    <img class="mx-2" th:src="@{/images/Ver.png}" width="26" height="26" />
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PAGINATOR -->
+            <div th:replace="pages/Util/Fragments :: paginator"></div>
+        </div>
+    </div>
+</body>
+
+    <!-- FOOTER -->
+    <footer th:replace="pages/Util/Fragments :: footer">
+    </footer>
+
+</html>

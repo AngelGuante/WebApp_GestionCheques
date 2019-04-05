@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<!-- HEAD -->
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <!-- STYLE -->
+    <link rel="stylesheet" th:href="@{/css/Styles.css}" />
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+</head>
+
+<!-- NAV BAR -->
+
+<nav th:fragment="nav" class="navbar color-1 p-0 sombra">
+    <div class="font-weight-bold navbar-brand brand p-2  display-4 letrasColor1 sombra">
+        <img th:src="@{/images/Logo_bar.png}" width="22" height="22" />
+        <label class="h6">GESTION DE CHEQUES</label>
+    </div>
+
+    <span class="navbar-text">
+        <div class="row">
+            <label class="font-weight-bold letrasColor1 mr-2"><span th:text="${usuario}"></span></label>
+            <form class="mr-5" th:action="@{/logout}" method="post">
+                <button class="btn btn-xs btn-primary">Logout</button>
+            </form>
+        </div>
+        
+    </span>
+</nav>
+
+<!-- PAGINATOR -->
+
+<div th:fragment="paginator">
+    <ul class="pagination paginator">
+        <li class="page-item" th:class="${page.first? 'page-item disabled': 'page-item'}">
+            <span class="page-link" th:if="${page.first}">Primera</span>
+            <a class="page-link" th:if="${not page.first}" th:href="@{${page.url}(page=0)}">Primera</a>
+        </li>
+
+        <li class="page-item" th:class="${not page.hasPrevious? 'page-item disabled': 'page-item'}">
+            <span class="page-link" th:if="${not page.hasPrevious}">&laquo;</span>
+            <a class="page-link" th:if="${page.hasPrevious}"
+                th:href="@{${page.url}(page=${page.paginaActual-2})}">&laquo;</a>
+        </li>
+
+        <li class="page-item" th:each="item : ${page.paginas}"
+            th:class="${item.actual? 'page-item active': 'page-item'}">
+            <span class="page-link" th:if="${item.actual}" th:text="${item.numero}"></span>
+            <a class="page-link" th:if="${not item.actual}" th:href="@{${page.url}(page=${item.numero-1})}"
+                th:text="${item.numero}"></a>
+        </li>
+
+
+        <li class="page-item" th:class="${not page.hasNext? 'page-item disabled': 'page-item'}">
+            <span class="page-link" th:if="${not page.hasNext}">&raquo;</span>
+            <a class="page-link" th:if="${page.hasNext}" th:href="@{${page.url}(page=${page.paginaActual})}">&raquo;</a>
+        </li>
+        <li class="page-item" th:class="${page.last? 'page-item disabled': 'page-item'}">
+            <span class="page-link" th:if="${page.last}">&Uacute;ltima</span>
+            <a class="page-link" th:if="${not page.last}"
+                th:href="@{${page.url}(page=${page.totalPaginas-1})}">&Uacute;ltima</a>
+        </li>
+    </ul>
+</div>
+
+<!-- FOOTER -->
+
+<footer th:fragment="footer">
+    <div class="container">
+        <hr />
+        <div style="display: inline-block;">
+            <img th:src="@{/images/spring.png}" alt="Spring Logo" />
+            <p>Developed With &copy;Spring Boot</p>
+        </div>
+        <span style="float: right;">
+            <p class="lead h5">Jorge David Terrero</p>
+            <p style="float: right;">(829) 479-5966</p>
+        </span>
+    </div>
+</footer>
+
+</html>

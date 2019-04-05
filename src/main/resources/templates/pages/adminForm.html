@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="pages/Util/Fragments :: head">
+</head>
+
+<body>
+    <nav th:replace="pages/Util/Fragments :: nav">
+    </nav>
+
+    <div class="card p-0 bg-light sombra container mt-5 pb-2">
+        <div class="card-body p-0">
+            <div class="card-title m-0">
+                <p class="font-weight-bold m-0 p-1 h4 color-3"> NUEVO USUARIOS</p>
+            </div>
+            <form class="offset-2 col-8" th:action="@{/admin/form}" method="post">
+                <label class="mt-2 lead">Usuario</label>
+                <input class="col mt-2" type="text" th:value="${user.username}" name="username">
+
+                <label class="mt-2 lead">Privilegios</label>
+                <select class="col my-4" th:value="${role.rol}">
+                    <option>STANDAR</option>
+                    <option>ADMIN</option>
+                </select>
+
+                <label class="mt-2 lead">Contraseña</label>
+                <input class="col" type="text" th:value="${user.password}" name="password">
+
+                <label class="mt-2 lead">Nombre</label>
+                <input class="col" type="text" th:value="${user.firtsName}" name="firtsName">
+
+                <label class="mt-2 lead">Apellido</label>
+                <input class="col" type="text" th:value="${user.lastName}" name="lastName">
+
+                <label class="mt-2 lead">Contacto</label>
+                <input class="col" type="text" th:value="${user.contacto}" name="contacto">
+
+                <input class="btn btn-success mt-5 px-4 py-3 float-right" type="submit" value="Guardar">
+
+                <!-- BOTON DE REGRESAR A LA VENTANA ANTERIOR -->
+                <a class="btn btn-primary p-3 mt-5 letrasColor1" th:href="@{/AdminHome}">Regresar</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+<!-- FOOTER -->
+<footer th:replace="pages/Util/Fragments :: footer">
+</footer>
+
+</html>
